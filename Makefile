@@ -10,8 +10,8 @@ all: r
 ## Configurable options ###########################################################################
 
 ## Cplex library location (configure these variables)
-LINUX_CPLEXLIBDIR   ?= /w/63/fbacchus/CPLEX_Studio1210/cplex/lib/x86-64_linux/static_pic
-LINUX_CPLEXINCDIR   ?= /w/63/fbacchus/CPLEX_Studio1210/cplex/include
+LINUX_CPLEXLIBDIR   ?= /opt/ibm/ILOG/CPLEX_Studio201/cplex/lib/x86-64_linux/static_pic
+LINUX_CPLEXINCDIR   ?= /opt/ibm/ILOG/CPLEX_Studio201/cplex/include
 #
 #If you want to build on macos
 DARWIN_CPLEXLIBDIR   ?= /Users/fbacchus/Applications/IBM/ILOG/CPLEX_Studio128/cplex/lib/x86-64_osx/static_pic/
@@ -53,7 +53,7 @@ MAXHS_SLIB = lib$(MAXHS).a#  Name of Maxhs static library.
 #-DIL_STD is a IBM/CPLEX issue
 
 MAXHS_CXXFLAGS = -DIL_STD -I. -I$(CPLEXINCDIR)
-MAXHS_CXXFLAGS += -D __STDC_LIMIT_MACROS -D __STDC_FORMAT_MACROS 
+MAXHS_CXXFLAGS += -D __STDC_LIMIT_MACROS -D __STDC_FORMAT_MACROS
 MAXHS_CXXFLAGS += -Wall -Wno-parentheses -Wextra -Wno-deprecated
 MAXHS_CXXFLAGS += -std=c++14
 
@@ -79,7 +79,7 @@ $(wildcard maxhs/utils/*.cc)
 SATSOLVER_HDRS = $(wildcard $(SATSOLVER)/mtl/*.h) $(wildcard $(SATSOLVER)/core/*.h) \
        $(wildcard $(SATSOLVER)/utils/*.h) $(wildcard $(SATSOLVER)/simp/*.h)
 MAXHS_HDRS = $(wildcard maxhs/core/*.h) $(wildcard maxhs/ifaces/*.h) \
-       $(wildcard maxhs/ds/*.h) $(wildcard maxhs/utils/*.h) 
+       $(wildcard maxhs/ds/*.h) $(wildcard maxhs/utils/*.h)
 
 OBJS = $(filter-out %Main.o, $(SRCS:.cc=.o))
 
@@ -114,7 +114,7 @@ $(BUILD_DIR)/release/lib/$(MAXHS_SLIB):	$(foreach o,$(OBJS),$(BUILD_DIR)/release
 $(BUILD_DIR)/debug/lib/$(MAXHS_SLIB):		$(foreach o,$(OBJS),$(BUILD_DIR)/debug/$(o))
 $(BUILD_DIR)/profile/lib/$(MAXHS_SLIB):	$(foreach o,$(OBJS),$(BUILD_DIR)/profile/$(o))
 
-## Compile rules 
+## Compile rules
 $(BUILD_DIR)/release/%.o:	%.cc
 	$(ECHO) Compiling: $@
 	$(VERB) mkdir -p $(dir $@)
