@@ -26,16 +26,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <string>
 #include "maxhs/core/MaxSolverTypes.h"
 
-
 class Params {
-  //MaxSolver helper class to manage its settable parameters. 
-  //see MaxSlvParams.cc for description
-public:
+  // MaxSolver helper class to manage its settable parameters.
+  // see MaxSlvParams.cc for description
+ public:
   Params();
   ~Params() {}
   void readOptions();
   int verbosity;
   int mverbosity;
+  int sverbosity;
   const double noLimit;
   int min_type;
   double mus_cpu_lim;
@@ -50,6 +50,7 @@ public:
   bool printOptions;
   bool printBstSoln;
   bool printSoln;
+  bool printNewFormat;
   double tolerance;
 
   CoreType coreType;
@@ -59,12 +60,16 @@ public:
   int seed_max;
   bool seed_learnts;
   int seed_all_limit;
-  bool bvarDecisions;
+  double seed_all_cpu;
   double frac_to_relax;
   int frac_rampup_start;
   int frac_rampup_end;
   int max_cores_before_cplex;
   int max_cpu_before_cplex;
+  double all_seeded_first_cplex_cpu;
+  double all_seeded_first_abs_cpu;
+  double all_seeded_2nd_abs_cpu;
+//  int max_cplex_calls_before_opt;
   bool lp_harden;
 
   int sort_assumps;
@@ -87,13 +92,12 @@ public:
 
   int cplex_pop_nsoln;
   double cplex_pop_cpu_lim;
-  //int cplex_solnpool_cap;
+  // int cplex_solnpool_cap;
 
-  //double trypop_cplextime_ub;
-  //double trypop_feedtime_lb;
+  // double trypop_cplextime_ub;
+  // double trypop_feedtime_lb;
   int trypop;
   int conflicts_from_ub;
-  bool prepro_output;
   bool preprocess;
   bool wcnf_eqs;
   bool wcnf_harden;
@@ -102,14 +106,25 @@ public:
   bool simplify_and_exit;
   int mx_find_mxes;
   int mx_mem_limit;
-  int mx_transform;
   bool mx_seed_originals;
 
-  bool mx_constrain_hs;
-  int mx_hs_use_abstraction;
-  bool mx_sat_preprocess;
-  double mx_cpu_lim;
+  bool abstract;
+  bool abstract_cores2greedy;
+  double abstract_max_ave_size;
+  int abstract_cplex_cores;
+  int abstract_greedy_cores;
+  int cplexgreedy;
+  int abstract_min_size;
+  int abstract_max_core_size;
+  int abstract_min_cores;
+  int abstract_assumps;
+  double cpu_per_exhaust;
+  double abstract_gap;
+  double initial_abstract_gap;
+  double abs_cpu;
 
+  bool mx_constrain_hs;
+  double mx_cpu_lim;
   std::string instance_file_name;
 };
 
